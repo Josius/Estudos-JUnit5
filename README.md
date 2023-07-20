@@ -59,3 +59,24 @@ Deixar assim para especificar o versão do jdk (no meu caso, o JDK 17):
 </plugin>
 ```
 E por fim, **rebuild** o projeto com o novo pom.xml
+
+# Aula 02 - Escrevendo Testes
+1. Criar um pacote para testes em **src/test/java**
+2. Criar uma classe de testes
+3. Criar métodos de teste com a JUnit5 annotation **@Test**
+
+## Annotations
+### @Test
+A mais básica de todas, oriunda de **org.junit.jupiter.api.Test**
+
+### @DisplayName(String)
+Quando o nome do método não sugestiona suficientemente o que precisamos saber sobre o que ele faz, podemos escolher trocar a aparência do nome do método na saída dos resultados do método, no console, para algo que seja mais entendível. Na saída retornará a string passada na annotation
+
+### Composição de uma assinatura do método:
+**\<modificador de acesso>** **\<tipo de retorno>** **\<nome do método>** **(\<parâmetros>)**
+
+- modificador de acesso: em testes, não é necessário
+- tipo de retorno: especificamos como void
+- nome do método: nomeamos com algo que demonstre o que o método faz
+- parâmetros: o que o método irá receber, pode ser até vazio
+
