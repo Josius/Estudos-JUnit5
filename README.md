@@ -80,3 +80,24 @@ Quando o nome do método não sugestiona suficientemente o que precisamos saber 
 - nome do método: nomeamos com algo que demonstre o que o método faz
 - parâmetros: o que o método irá receber, pode ser até vazio
 
+# Aula 03 - Ciclo de Vida dos Métodos
+## Métodos de Configuração - Before Annotation
+Usados com a finalidade de que um método seja executado antes de qualquer outra coisa ou mesmo dos outros métodos. Podemos usar uma configuração que seja executada antes de tudo ou que precise ser executada antes de cada método de teste.
+
+### @BeforeAll
+Ao método é especificado que o código dentro dele seja executado antes de qualquer coisa nesta classe de teste, antes de qualquer método de teste seja executado. Não usar private no modificador de acesso do método.
+
+### @BeforeEach
+Nós vamos assumir que também precisamo de algum tipo de configuração que execute toda vez antes que um método de teste inicie sua execução
+
+## Métodos de Limpeza - After Annotation
+Usados em conjunto com os métodos de configuração, com função de finalização, eles fecham o que foi configurado anteriormente ou após a execução dos métodos.
+
+### @AfterAll
+Usado para finalizar todas as configurações após todas as execuções de todos métodos de teste.
+
+### @AfterEach
+Usado para finalizar após cada execução de cada método de teste.
+
+### @TestInstance(Lifecycle.PER_CLASS)
+Usado para que não tenhamos que marcar todos os métodos de configuração e limpeza como estáticos
