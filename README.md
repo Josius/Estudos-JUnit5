@@ -101,3 +101,5 @@ Usado para finalizar após cada execução de cada método de teste.
 
 ### @TestInstance(Lifecycle.PER_CLASS)
 Usado para que não tenhamos que marcar todos os métodos de configuração e limpeza como estáticos
+
+# Aula 04 - Testes Parametrizados
