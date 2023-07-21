@@ -1,6 +1,7 @@
 package junit5tests;
 
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -30,7 +31,7 @@ public class ParameterizedTests {
 	@ParameterizedTest
 	// abaixo, como o método recebe 2 parâmetros, enviamos string separada por vírgula
 	@CsvSource(value = { "ciclops,wolverine", "rogue,storm", "beast,gambit", "jubilee, jean grey", "professor,X" }) 
-	void csvSource_doubleString(String param_1, String param_2) {
+	void csvSource_StringString(String param_1, String param_2) {
 		System.out.println("param_1: " + param_1 + ", param_2: " + param_2);
 	}
 
@@ -55,4 +56,34 @@ public class ParameterizedTests {
 	void csvSource_StringWithDiffDelimiter(String param_1, String param_2) {
 		System.out.println("param_1: " + param_1 + ", param_2: " + param_2);
 	}
+
+	// passando parâmetros oriundos de um arquivo csv
+	@ParameterizedTest
+	// abaixo, numLinesToSkip não lê a 1ª linha do arquivo csv
+	@CsvFileSource(files = "src/test/resources/params/shoppinglist.csv", numLinesToSkip = 1)
+	void csvFileSource_StringDoubleIntStringString(String name, double price, int qty, String uom, String provider){
+		System.out.println("name: " + name + ", price: " + price + ", qty: " + qty + ", uom: " + uom + ", provider: " + provider);
+	}
+	
+	// passando parâmetros oriundos de dois arquivos csv's
+	@ParameterizedTest
+	// abaixo, numLinesToSkip não lê a 1ª linha do arquivo csv e lê dois csv's ao alocar dentro de um array
+	@CsvFileSource(files = {"src/test/resources/params/shoppinglist.csv", 
+	"src/test/resources/params/shoppinglist2.csv"}, numLinesToSkip = 1)
+	void csvFileSource_StringDoubleIntStringString2(String name, double price, int qty, String uom, String provider){
+		System.out.println("name: " + name + ", price: " + price + ", qty: " + qty + ", uom: " + uom + ", provider: " + provider);
+	}
+
+	// passando parâmetros oriundos de um arquivo csv com outro caractere delimitador
+	// não podemos usar delimiter e delimiterString ao mesmo tempo no mesmo arquivo
+	@ParameterizedTest
+	// abaixo, numLinesToSkip não lê a 1ª linha do arquivo csv
+	@CsvFileSource(files = "src/test/resources/params/shoppinglist3.csv", numLinesToSkip = 1, delimiterString = "___")
+	void csvFileSource_StringDoubleIntStringStringSpecifierDelimiter(String name, double price, int qty, String uom, String provider){
+		System.out.println("name: " + name + ", price: " + price + ", qty: " + qty + ", uom: " + uom + ", provider: " + provider);
+	}
+	/* SOBRE STRING VAZIA E NULL NO ARQUIVO CSV (ver no arquivo shoppinglist3.csv)
+	 * se quisermos especificar uma string vazia, no campo desejado colocamos aspas duplas vazias
+	 * se quisermos especificar uma string null, no campo desejado deixamos vazio, sem nada
+	  */
 }
