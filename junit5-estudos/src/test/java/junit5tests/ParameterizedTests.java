@@ -21,7 +21,7 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 public class ParameterizedTests {
 
 	@ParameterizedTest(name = "Run: {index} - value: {arguments}")
-	@ValueSource(ints = { 1, 5, 6 })
+	@ValueSource(ints = {1, 5, 6})
 	void intValues(int theParam) {
 		System.out.println("theParam : " + theParam);
 	}
@@ -33,7 +33,7 @@ public class ParameterizedTests {
 	// @NullSource // passa um string null, também não usar com tipos primitivos
 	// @EmptySource // string vazia passada para o @ValueSource, não usar com tipos
 	// primitivos, como no método acima
-	@ValueSource(strings = { "firstString", "segundaString" })
+	@ValueSource(strings = {"firstString", "segundaString"})
 	void stringValues(String theParam) {
 		System.out.println("theParam: " + theParam);
 	}
@@ -41,7 +41,7 @@ public class ParameterizedTests {
 	@ParameterizedTest
 	// abaixo, como o método recebe 2 parâmetros, enviamos string separada por
 	// vírgula
-	@CsvSource(value = { "ciclops,wolverine", "rogue,storm", "beast,gambit", "jubilee, jean grey", "professor,X" })
+	@CsvSource(value = {"ciclops,wolverine", "rogue,storm", "beast,gambit", "jubilee, jean grey", "professor,X"})
 	void csvSource_StringString(String param_1, String param_2) {
 		System.out.println("param_1: " + param_1 + ", param_2: " + param_2);
 	}
@@ -50,8 +50,8 @@ public class ParameterizedTests {
 	// abaixo, não precisamos especificar o tipo do dado enviado, somente separar
 	// por vírgula dentro de aspas duplas e a ordem deve estar como no método que
 	// receberá
-	@CsvSource(value = { "ciclops,32,true", "rogue,21,false", "beast,5,true" })
-	// abaixo, necessário especificar o tipo de parâmetro a ser recebido
+	@CsvSource(value = {"ciclops,32,true", "rogue,21,false", "beast,5,true"})
+		// abaixo, necessário especificar o tipo de parâmetro a ser recebido
 	void csvSource_StringIntBoolean(String param_1, int param_2, boolean param_3) {
 		System.out.println("param_1: " + param_1 + ", param_2: " + param_2 + ", param_3: " + param_3);
 	}
@@ -59,7 +59,7 @@ public class ParameterizedTests {
 	// se a string passada tiver uma vírgula em seu texto, precisamos passar um
 	// escape -> ('') para não entender essa vírgula como um separador para o método
 	@ParameterizedTest
-	@CsvSource(value = { "ciclops,'Summers, Scott'", "wolverine,'X,Arma'" })
+	@CsvSource(value = {"ciclops,'Summers, Scott'", "wolverine,'X,Arma'"})
 	void csvSource_StringWithComa(String param_1, String param_2) {
 		System.out.println("param_1: " + param_1 + ", param_2: " + param_2);
 	}
@@ -68,8 +68,8 @@ public class ParameterizedTests {
 	// parâmetros, podemos mudar o tipo de delimitador como um atributo da
 	// annotation
 	@ParameterizedTest
-	@CsvSource(value = { "ciclops?wolverine", "rogue?storm", "beast?gambit", "jubilee?jean grey",
-			"professor?X" }, delimiter = '?')
+	@CsvSource(value = {"ciclops?wolverine", "rogue?storm", "beast?gambit", "jubilee?jean grey",
+			"professor?X"}, delimiter = '?')
 	void csvSource_StringWithDiffDelimiter(String param_1, String param_2) {
 		System.out.println("param_1: " + param_1 + ", param_2: " + param_2);
 	}
@@ -87,8 +87,8 @@ public class ParameterizedTests {
 	@ParameterizedTest
 	// abaixo, numLinesToSkip não lê a 1ª linha do arquivo csv e lê dois csv's ao
 	// alocar dentro de um array
-	@CsvFileSource(files = { "src/test/resources/params/shoppinglist.csv",
-			"src/test/resources/params/shoppinglist2.csv" }, numLinesToSkip = 1)
+	@CsvFileSource(files = {"src/test/resources/params/shoppinglist.csv",
+			"src/test/resources/params/shoppinglist2.csv"}, numLinesToSkip = 1)
 	void csvFileSource_StringDoubleIntStringString2(String name, double price, int qty, String uom, String provider) {
 		System.out.println(
 				"name: " + name + ", price: " + price + ", qty: " + qty + ", uom: " + uom + ", provider: " + provider);
@@ -101,13 +101,13 @@ public class ParameterizedTests {
 	// abaixo, numLinesToSkip não lê a 1ª linha do arquivo csv
 	@CsvFileSource(files = "src/test/resources/params/shoppinglist3.csv", numLinesToSkip = 1, delimiterString = "___")
 	void csvFileSource_StringDoubleIntStringStringSpecifierDelimiter(String name, double price, int qty, String uom,
-			String provider) {
+																	 String provider) {
 		System.out.println(
 				"name: " + name + ", price: " + price + ", qty: " + qty + ", uom: " + uom + ", provider: " + provider);
 	}
 	/*
 	 * SOBRE STRING VAZIA E NULL NO ARQUIVO CSV (ver no arquivo shoppinglist3.csv)
-	 * se quisermos especificar uma string vazia, no campo desejado colocamos aspas duplas vazias 
+	 * se quisermos especificar uma string vazia, no campo desejado colocamos aspas duplas vazias
 	 * se quisermos especificar uma string null, no campo desejado deixamos vazio, sem nada
 	 */
 
@@ -131,7 +131,7 @@ public class ParameterizedTests {
 		// processing done her
 		return Arrays.asList("mixirica", "maçã", "banana");
 	}
-	
+
 	// oriundo de um stream
 	@ParameterizedTest
 	@MethodSource(value = "sourceStringAsStream")
@@ -144,19 +144,22 @@ public class ParameterizedTests {
 		return Stream.of("beetroot", "apple", "pear");
 	}
 
-	// se quisermos testar métodos que tenham a assinatura com mais parâmetros, por exemplo, um método que tenha string e double, que precisamos passar para cada execução de teste? Para isso criamos um método que returna qualquer lista de Arguments ou stream de Arguments, no caso Arguments -> org.junit.jupiter.params.provider.Arguments;
+	// se quisermos testar métodos que tenham a assinatura com mais parâmetros, por exemplo, um método que tenha
+	// string e double, que precisamos passar para cada execução de teste? Para isso criamos um método que returna
+	// qualquer lista de Arguments ou stream de Arguments, no caso Arguments -> org.junit.jupiter.params.provider
+	// .Arguments;
 	@ParameterizedTest
 	@MethodSource(value = "sourceList_StringDouble")
 	void methodSource_StringDoubleList(String param_1, double param_2) {
 		System.out.println("param_1: " + param_1 + ", param_2: " + param_2);
 	}
-	
+
 	// ao invés de 'Arguments.arguments[...]', importamos o static de 'Arguments' e usamos como abaixo:
 	List<Arguments> sourceList_StringDouble() {
 		// processing
-		return Arrays.asList(arguments("batata", 3.6), 
-								arguments("carrot", 7.2),
-								arguments("cabbage", 10.8));
+		return Arrays.asList(arguments("batata", 3.6),
+				arguments("carrot", 7.2),
+				arguments("cabbage", 10.8));
 	}
 
 	// o mesmo acima pode ser feito se quisermos um stream de Arguments
@@ -165,19 +168,19 @@ public class ParameterizedTests {
 	void methodSource_StringDoubleStream(String param_1, double param_2) {
 		System.out.println("param_1: " + param_1 + ", param_2: " + param_2);
 	}
-	
+
 	Stream<Arguments> sourceStream_StringDouble() {
 		// processing
-		return Stream.of(arguments("cebola", 8.5), 
-								arguments("alho", 7.2),
-								arguments("garlic", 10.8));
+		return Stream.of(arguments("cebola", 8.5),
+				arguments("alho", 7.2),
+				arguments("garlic", 10.8));
 	}
 
-	/* SOBRE MÉTODOS ORIUNDOS DE UMA CLASSE QUE NÃO É A CLASSE DE TESTE, UMA OUTRA CLASSE 
+	/* SOBRE MÉTODOS ORIUNDOS DE UMA CLASSE QUE NÃO É A CLASSE DE TESTE, UMA OUTRA CLASSE
 	 * para chamar o método de outra classe usamos em value:
 	 * nome_do_pacote + nome_da_classe + nome_do_método
 	 * o método sempre precisa ser estático
-	*/
+	 */
 	@ParameterizedTest
 	@MethodSource(value = "junit5tests.ParamProvider#sourceStream_StringDouble")
 	void methodSource_StringDoubleStreamFromDiffClass(String param_1, double param_2) {
