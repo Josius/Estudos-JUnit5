@@ -47,6 +47,4 @@ public class DisabledEnabledTest {
 	void fifthTest() {
 		System.out.println("The fifth teste is here!");
 	}
-
-
 }
